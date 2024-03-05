@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рекомендер</title>
+
+    <script src="eel.js"></script>
+    <link rel = "icon" type="image/png" href="/robot.png">
+
+    <link rel="stylesheet" href="gui.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+
+</head>
+<body>
+    <input id="location" type="text" placeholder="Введите название фильма..." required="">
+
+    <button id="show">Поиск рекомендаций</button>
+
+    <div class="info"></div>
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+
+    <div class="info">
+        <ul id="movieList"></ul>
+    </div>
+
+    <script type="text/javascript">
+        async function display_movie() {
+            let movie = document.getElementById('location').value;
+            let res = await eel.movie_rec(movie)();
+
+            // Очищаем предыдущий список фильмов перед добавлением новых
+            document.getElementById('movieList').innerHTML = '';
+
+            // Добавляем каждый фильм в список
+            res.forEach(function(item) {
+                let li = document.createElement('li');
+                li.textContent = item;
+                document.getElementById('movieList').appendChild(li);
+            });
+        }
+
+        document.getElementById('show').addEventListener('click', function() {
+            display_movie();
+        });
+    </script>
+
+</body>
+</html>
