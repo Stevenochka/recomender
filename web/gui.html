@@ -29,10 +29,8 @@
             let movie = document.getElementById('location').value;
             let res = await eel.movie_rec(movie)();
 
-            // Очищаем предыдущий список фильмов перед добавлением новых
             document.getElementById('movieList').innerHTML = '';
 
-            // Добавляем каждый фильм в список
             res.forEach(function(item) {
                 let li = document.createElement('li');
                 li.textContent = item;
